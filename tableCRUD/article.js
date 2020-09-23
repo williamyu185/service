@@ -3,7 +3,7 @@ const baseInstance = require('../creatThenKeepLinkDataBase/index.js');
 const Sequelize = baseInstance.defaultBaseInstance;
 const Op = Sequelize.Op;
 // 引入数据表模型
-const Article = Sequelize.import('../tableStructure/article');
+const Article = (require('../tableStructure/article'))(Sequelize);
 //自动创建表
 Article.sync({force: false});
 

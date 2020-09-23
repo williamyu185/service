@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = ({
     development: {
         dataBaseConfig: {
             host: 'localhost',
@@ -12,4 +12,4 @@ module.exports = {
 
         }
     }
-};
+})[process.env.NODE_ENV];

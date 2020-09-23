@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const config = require('../config/index.js');
-const envConfig = config[process.env.NODE_ENV].dataBaseConfig;
+const envConfig = config.dataBaseConfig;
 
 const creatBaseInstance = function(database = '') {
     return new Sequelize(database, envConfig.account, envConfig.password, {

@@ -1,43 +1,44 @@
+const Sequelize = require('sequelize');
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function(sequelize) {
     return sequelize.define('article',{
         id: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             primaryKey: true,
             allowNull: true,
             autoIncrement: true
         },
         //文章标题
         title: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             field: 'title'
         },
         //作者
         author: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             field: 'author'
         },
         //内容
         content: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             field:'content'
         },
         //文章分类
         category: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             field: 'category'
         },
         // 创建时间
         createdAt: {
-            type: DataTypes.DATE
+            type: Sequelize.DATE
         },
         // 更新时间
         updatedAt: {
-            type: DataTypes.DATE
+            type: Sequelize.DATE
         }
     }, {
         /**
