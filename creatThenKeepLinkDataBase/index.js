@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const config = require('../config/index.js');
+const config = require('../config/mysql.js');
 const envConfig = config.dataBaseConfig;
 
 const creatBaseInstance = function(database = '') {
