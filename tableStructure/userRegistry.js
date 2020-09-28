@@ -50,6 +50,12 @@ module.exports = function(sequelize) {
             field: 'level',
             defaultValue: '{role: {}}'
         },
+        isEnable: {
+            type: Sequelize.STRING,
+            allowNull: true,
+            field: 'isEnable',
+            defaultValue: '0'
+        },
     }, {
         timestamps: true,
         freezeTableName: true,

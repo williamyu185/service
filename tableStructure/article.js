@@ -41,7 +41,13 @@ module.exports = function(sequelize) {
         updatedAt: {
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW
-        }
+        },
+        isEnable: {
+            type: Sequelize.STRING,
+            allowNull: true,
+            field: 'isEnable',
+            defaultValue: '0'
+        },
     }, {
         timestamps: true,
         /**
