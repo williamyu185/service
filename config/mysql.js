@@ -1,8 +1,8 @@
-module.exports = ({
+let config = {
     development: {
         dataBaseConfig: {
             host: 'localhost',
-            database: 'koa_demo',
+            database: 'userRegistry',
             account: 'root',
             password: '123456789'
         }
@@ -12,4 +12,6 @@ module.exports = ({
 
         }
     }
-})[process.env.NODE_ENV];
+};
+
+module.exports = config[process.env.NODE_ENV];
