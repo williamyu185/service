@@ -1,10 +1,9 @@
 const Sequelize = require('sequelize');
 const config = require('../config/mysql.js');
-const envConfig = config.dataBaseConfig;
 
 const creatBaseInstance = function(database = '') {
-    return new Sequelize(database, envConfig.account, envConfig.password, {
-        host: envConfig.host,
+    return new Sequelize(database, config.account, config.password, {
+        host: config.host,
         dialect: 'mysql',
         operatorsAliases: false,
         dialectOptions: {
@@ -27,5 +26,5 @@ const creatBaseInstance = function(database = '') {
 
 module.exports = {
     creatBaseInstance,
-    defaultBaseInstance: creatBaseInstance(envConfig.database)
+    defaultBaseInstance: creatBaseInstance(config.database)
 };

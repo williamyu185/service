@@ -1,16 +1,12 @@
 let config = {
     development: {
-        dataBaseConfig: {
-            host: 'localhost',
-            database: 'userRegistry',
-            account: 'root',
-            password: '123456789'
-        }
+        host: 'localhost',
+        database: 'userRegistry',
+        account: 'root',
+        password: '123456789'
     },
     production: {
-        dataBaseConfig: {
 
-        }
     }
 };
 

@@ -1,15 +1,11 @@
 let config  = {
     development: {
-        dataBaseConfig: {
-            host: '127.0.0.1',
-            password: '123456789',
-            port: '6379'
-        }
+        host: '127.0.0.1',
+        password: '123456789',
+        port: '6379'
     },
     production: {
-        dataBaseConfig: {
 
-        }
     }
 };
 
