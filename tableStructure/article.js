@@ -22,7 +22,7 @@ module.exports = function(sequelize) {
         },
         //内容
         content: {
-            type: Sequelize.STRING,
+            type: Sequelize.TEXT,
             allowNull: false,
             field: 'content'
         },
