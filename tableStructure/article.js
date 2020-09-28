@@ -5,7 +5,7 @@ module.exports = function(sequelize) {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
-            allowNull: true,
+            allowNull: false,
             autoIncrement: true
         },
         //文章标题
@@ -24,7 +24,7 @@ module.exports = function(sequelize) {
         content: {
             type: Sequelize.STRING,
             allowNull: false,
-            field:'content'
+            field: 'content'
         },
         //文章分类
         category: {
@@ -34,11 +34,13 @@ module.exports = function(sequelize) {
         },
         // 创建时间
         createdAt: {
-            type: Sequelize.DATE
+            type: Sequelize.DATE,
+            defaultValue: Sequelize.NOW
         },
         // 更新时间
         updatedAt: {
-            type: Sequelize.DATE
+            type: Sequelize.DATE,
+            defaultValue: Sequelize.NOW
         }
     }, {
         /**
