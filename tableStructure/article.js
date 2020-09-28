@@ -43,6 +43,7 @@ module.exports = function(sequelize) {
             defaultValue: Sequelize.NOW
         }
     }, {
+        timestamps: true,
         /**
          * 如果为true，则表示名称和model相同，即user
          * 如果为fasle，mysql创建的表名称会是复数，即users

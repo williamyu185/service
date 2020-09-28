@@ -30,7 +30,7 @@ module.exports = function(sequelize) {
         },
         // 备注
         remarks: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING(10000),
             allowNull: true,
             field: 'remarks'
         },
@@ -41,11 +41,13 @@ module.exports = function(sequelize) {
             type: Sequelize.DATE
         },
         level: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING(10000),
             allowNull: true,
-            field: 'nick'
+            field: 'level',
+            defaultValue: '{role: {}}'
         },
     }, {
+        timestamps: true,
         freezeTableName: true,
         charset: 'utf8mb4', 
         collate: 'utf8mb4_general_ci',
