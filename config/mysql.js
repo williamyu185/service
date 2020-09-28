@@ -1,7 +1,7 @@
 let config = {
     development: {
-        host: 'localhost',
-        database: 'userRegistry',
+        host: '127.0.0.1',
+        database: 'bbs',
         account: 'root',
         password: '123456789'
     },
