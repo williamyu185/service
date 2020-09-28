@@ -11,7 +11,6 @@ class article {
                 const ret = await ArticleModel.createArticle(request);
                 //使用刚刚创建的文章ID查询文章详情，且返回文章详情信息
                 const data = await ArticleModel.getArticleDetail(ret.id);
-
                 ctx.response.status = 200;
                 ctx.body = {
                     code: 200,
