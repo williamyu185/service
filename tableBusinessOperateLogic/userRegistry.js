@@ -5,7 +5,7 @@ class article {
     static async create(ctx) {
         //接收客服端
         let request = ctx.request.body;
-        if(request.email && request.password && request.userName) {
+        if(!validator.isEmpty(request.email) && !validator.isEmpty(request.password) && !validator.isEmpty(request.userName)) {
             try {
                 const ret = await UserRegistryModel.createUser(request);
                 const data = await UserRegistryModel.userRegistryMsg(ret.id);

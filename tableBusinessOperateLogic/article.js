@@ -5,7 +5,7 @@ class article {
     static async create(ctx) {
         //接收客服端
         let request = ctx.request.body;
-        if(request.title && request.author && request.content && request.category) {
+        if(!validator.isEmpty(request.title) && !validator.isEmpty(request.author) && !validator.isEmpty(request.content) && !validator.isEmpty(request.category)) {
             try {
                 //创建文章模型
                 const ret = await ArticleModel.createArticle(request);
