@@ -26,19 +26,23 @@ module.exports = function(sequelize) {
         nick: {
             type: Sequelize.STRING,
             allowNull: true,
-            field: 'nick'
+            field: 'nick',
+            defaultValue: ''
         },
         // 备注
         remarks: {
             type: Sequelize.STRING(10000),
             allowNull: true,
-            field: 'remarks'
+            field: 'remarks',
+            defaultValue: ''
         },
         createdAt: {
-            type: Sequelize.DATE(13)
+            type: Sequelize.DATE,
+            allowNull: true,
         },
         updatedAt: {
-            type: Sequelize.DATE(13)
+            type: Sequelize.DATE,
+            allowNull: true,
         },
         level: {
             type: Sequelize.STRING(10000),
