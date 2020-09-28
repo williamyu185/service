@@ -9,6 +9,7 @@ const helmet = require('koa-helmet');
 const koaBody = require('koa-body');
 const session = require('koa-session');
 const allRoutes = require('./routes/index.js');
+const config = require('./config/index.js');
 app.keys = ['some secret hurr'];
 const sessionConfig = {
    key: 'sessionId',   //cookie key (default is koa:sess)
@@ -90,6 +91,6 @@ let onListening = function() {
     debug('Listening on ' + bind);
 };
 let server = http.createServer(app.callback());
-app.listen(3000);
+app.listen(config.port);
 server.on('error', onError);
 server.on('listening', onListening);
