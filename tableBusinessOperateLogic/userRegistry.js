@@ -1,5 +1,8 @@
 const UserRegistryModel = require('../tableCRUD/userRegistry.js');
 const validator = require('validator');
+const redisClient = require('../creatRedis/index.js');
+const uuid = require('uuid');
+const uuidv5 = uuid.v5;
 
 class article {
     static async create(ctx) {
@@ -32,23 +35,48 @@ class article {
         }
     }
     static async search(ctx) {
-        let userName = ctx.params.userName;
-        if(id) {
+        let request = ctx.request.body;
+        if(!validator.isEmpty(request.userName)) {
             try {
-                // 查询文章详情模型
-                let data = await UserRegistryModel.userRegistryMsg(userName);
+                let uuidUrl = uuidv5(ctx.url, uuidv5.URL);
+                redisClient.hmset(uuidUrl, obj, function(err, obj) {
+                    redisClient.hgetall(uuidUrl, (err, obj) => {
+                        console.log(`hgetall:${JSON.stringify(obj)}`);
+                        console.log(obj.age);
+                    })
+                });
+
+
+
+
+                // redisClient.set(ctx.url, JSON.stringify({aa: '454---'}), (err, data) => {
+                //     console.log(data, '++++888==')
+                // });
+                // let hitData = redisClient.get(ctx.url, (err, data) => {
+                //     console.log(data, '4646464======')
+                // });
+                let data = {};
+                // if(!hitData) {
+                //     data = await UserRegistryModel.userRegistryMsg(request.userName);
+                //     redisClient.setAsync(ctx.url, data);
+                // }
+
+
+
+                // data = await UserRegistryModel.userRegistryMsg(request.userName);
+
                 ctx.response.status = 200;
                 ctx.body = {
                     code: 200,
                     msg: '查询成功',
-                    data
+                    data: data
                 }
             }catch(err) {
                 ctx.response.status = 412;
                 ctx.body = {
                     code: 412,
                     msg: '查询失败',
-                    data
+                    data: {}
                 }
             }
         }else {

@@ -5,7 +5,7 @@ bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 let client = redis.createClient(config.port, config.host, {auth_pass: config.password});
 client.on('error', function (err) {
-    console.log('redis error: ', err);
+    console.error('redis error: ', err);
 });
 client.on('connect', function(){
     console.log('redis connect success!');
