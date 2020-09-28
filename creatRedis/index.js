@@ -10,5 +10,6 @@ client.on('error', function (err) {
 client.on('connect', function(){
     console.log('redis connect success!');
 });
+client = bluebird.promisifyAll(client);
 
 module.exports = client;

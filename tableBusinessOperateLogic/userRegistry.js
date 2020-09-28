@@ -31,12 +31,12 @@ class article {
             }
         }
     }
-    static async detail(ctx) {
-        let id = ctx.params.id;
+    static async search(ctx) {
+        let userName = ctx.params.userName;
         if(id) {
             try {
                 // 查询文章详情模型
-                let data = await ArticleModel.getArticleDetail(id);
+                let data = await UserRegistryModel.userRegistryMsg(userName);
                 ctx.response.status = 200;
                 ctx.body = {
                     code: 200,
@@ -55,7 +55,7 @@ class article {
             ctx.response.status = 416;
             ctx.body = {
                 code: 416,
-                msg: '文章ID必须传'
+                msg: '用户名必须传'
             }
         }
     }

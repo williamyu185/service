@@ -17,10 +17,10 @@ class UserRegistryModel {
         });
     }
 
-    static async userRegistryMsg(id) {
+    static async userRegistryMsg(userName) {
         return await userRegistry.findOne({
             where: {
-                id
+                userName
             }
         });
     }

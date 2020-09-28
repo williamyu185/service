@@ -6,5 +6,6 @@ const router = new Router({
 });
 
 router.post('/bbs/userRegistry/create', userRegistry.create);
+router.post('/bbs/userRegistry/search', userRegistry.search);
 
 module.exports = router;

@@ -5,7 +5,9 @@ const router = new Router({
     prefix: ''
 });
 
-//创建文章
+// 创建文章
 router.post('/bbs/article/create', Artile.create);
+// 查询文章
+router.post('/bbs/article/search', Artile.search);
 
 module.exports = router;

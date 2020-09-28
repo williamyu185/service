@@ -1,5 +1,6 @@
 const ArticleModel = require('../tableCRUD/article');
 const validator = require('validator');
+const redisClient = require('../creatRedis/index.js');
 
 class article {
     static async create(ctx) {
@@ -33,17 +34,21 @@ class article {
             }
         }
     }
-    static async detail(ctx) {
+    static async search(ctx) {
         let id = ctx.params.id;
         if(id) {
             try {
-                // 查询文章详情模型
-                let data = await ArticleModel.getArticleDetail(id);
+                let hitData = await redisClient.getAsync('bbs-Article-' + id, data);
+                if(!hitData) {
+                    // 查询文章详情模型
+                    let data = await ArticleModel.getArticleDetail(id);
+                    redisClient.setAsync('bbs-Article-' + id, data);
+                }
                 ctx.response.status = 200;
                 ctx.body = {
                     code: 200,
                     msg: '查询成功',
-                    data
+                    data: hitData || data
                 }
             }catch(err) {
                 ctx.response.status = 412;
