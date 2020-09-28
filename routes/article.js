@@ -1,5 +1,5 @@
 const Router = require('koa-router');
-const Artile = require('../tableBusinessOperateLogic/article');
+const Artile = require('../tableBusinessOperateLogic/article.js');
 
 const router = new Router({
     prefix: ''

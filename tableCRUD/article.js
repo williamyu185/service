@@ -14,8 +14,8 @@ class ArticleModel {
     static async createArticle(data) {
         return await Article.create({
             title: data.title, //标题
-            author: data.author,  //作者
-            content: data.content,  //文章内容
+            author: data.author, //作者
+            content: data.content, //文章内容
             category: data.category //文章分类
         });
     }
