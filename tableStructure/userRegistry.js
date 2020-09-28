@@ -18,10 +18,10 @@ module.exports = function(sequelize) {
             allowNull: false,
             field: 'password'
         },
-        name: {
+        userName: {
             type: Sequelize.STRING,
             allowNull: false,
-            field: 'name'
+            field: 'userName'
         },
         nick: {
             type: Sequelize.STRING,
@@ -35,10 +35,10 @@ module.exports = function(sequelize) {
             field: 'remarks'
         },
         createdAt: {
-            type: Sequelize.DATE
+            type: Sequelize.DATE(13)
         },
         updatedAt: {
-            type: Sequelize.DATE
+            type: Sequelize.DATE(13)
         },
         level: {
             type: Sequelize.STRING(10000),
