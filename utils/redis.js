@@ -6,17 +6,17 @@ class redis {
     static md5Encode(key) {
         return md5(key);
     }
-    static hmset(key = '', value = {}, isUUID = true) {
+    static hmset(params) {
         return new Promise((reslove, reject) => {
-            let md5key = isUUID ? redis.md5Encode(key) : key;
-            redisClient.hmset(md5key, value, (err, data) => {
+            let md5key = (params.isUUID === undefined ? true : params.isUUID) ? redis.md5Encode(params.key) : params.key;
+            redisClient.hmset(md5key, params.value, (err, data) => {
                 if(!err) {
                     reslove();
                 }else {
                     reslove(err);
                 }
             });
-            redisClient.expire(md5key, redisConfig.expire);
+            redisClient.expire(md5key, params.expire || redisConfig.expire);
         })
     }
     static hgetall(key = '', isUUID = true) {

@@ -59,11 +59,11 @@ class userRegistry {
 
     static async modify(ctx) {
         let requestParams = ctx.request.body;
-        let userName = requestParams.userName;
+        let id = requestParams.id;
         let newPassword = requestParams.newPassword;
-        if(!validator.isEmpty(userName) && !validator.isEmpty(newPassword)) {
+        if(!validator.isEmpty(id) && !validator.isEmpty(newPassword)) {
             try {
-                await UserRegistryModel.modify(userName, newPassword);
+                await UserRegistryModel.modify(id, newPassword);
                 servletUtil.responseData({
                     ctx,
                     msg: '修改成功',
@@ -91,13 +91,17 @@ class userRegistry {
         let requestParams = request.body;
         if(!validator.isEmpty(requestParams.userName)) {
             try {
-                let data = {};
+                let data = [];
                 let hitData = null;
                 let key = ctx.url + '-' + request.method + '-' + JSON.stringify(requestParams);
-                hitData = await redisUtil.hgetall(key);
+                // hitData = await redisUtil.hgetall(key);
                 if(!hitData) {
                     data = await UserRegistryModel.userRegistryMsg(requestParams.userName);
-                    (data !== null) && redisUtil.hmset(key, data.dataValues);
+                    console.log(data, '------>>>')
+                    // (data !== null) && redisUtil.hmset({
+                    //     key, 
+                    //     value: data.dataValues,
+                    // });
                 }
                 servletUtil.responseData({
                     ctx,

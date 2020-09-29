@@ -18,19 +18,29 @@ class UserRegistryModel {
     }
 
     static async userRegistryMsg(userName) {
-        return await userRegistry.findOne({
+        // return await userRegistry.findOne({
+        //     where: {
+        //         userName
+        //     }
+        // });
+        return await userRegistry.findAll({
+            // attributes: {
+            //     include: [
+            //       ['userName']
+            //     ]
+            // },
             where: {
                 userName
             }
         });
     }
 
-    static async modify(userName, newPassword) {
+    static async modify(id, newPassword) {
         return await userRegistry.update({
             password: newPassword
         }, {
             where: {
-                userName
+                id
             }
         });
     }
