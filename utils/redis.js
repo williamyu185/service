@@ -4,7 +4,7 @@ const uuidv5 = uuid.v5;
 
 class redis {
     static UUIDUrl(key) {
-        return uuidv5(key, uuidv5.URL);
+        return uuidv5(key);
     }
     static hmset(key = '', value = '', isUUID = true) {
         return new Promise((reslove, reject) => {
@@ -17,9 +17,10 @@ class redis {
             });
         });
     }
-    static hgetall(key = '', value = '', isUUID = true) {
-        return new Promise((reslove, reject) => {
+    static hgetall(key = '', isUUID = true) {
+        return new Promise((reslove, reject) => {debugger
             redisClient.hgetall(isUUID ? redis.UUIDUrl(key) : key, (err, data) => {
+                debugger
                 if(!err) {
                     reslove(data);
                 }else {
@@ -29,4 +30,4 @@ class redis {
         });
     }
 }
-export default redis;
+module.exports = redis;
