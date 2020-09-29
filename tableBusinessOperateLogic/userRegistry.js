@@ -94,14 +94,13 @@ class userRegistry {
                 let data = [];
                 let hitData = null;
                 let key = ctx.url + '-' + request.method + '-' + JSON.stringify(requestParams);
-                // hitData = await redisUtil.hgetall(key);
+                hitData = await redisUtil.hgetall(key);
                 if(!hitData) {
                     data = await UserRegistryModel.userRegistryMsg(requestParams.userName);
-                    console.log(data, '------>>>')
-                    // (data !== null) && redisUtil.hmset({
-                    //     key, 
-                    //     value: data.dataValues,
-                    // });
+                    (data !== null) && redisUtil.hmset({
+                        key, 
+                        value: data.dataValues
+                    });
                 }
                 servletUtil.responseData({
                     ctx,
