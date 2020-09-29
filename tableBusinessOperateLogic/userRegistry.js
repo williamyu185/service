@@ -43,13 +43,15 @@ class article {
                 hitData = await redisUtil.hgetall(key);
                 if(!hitData) {
                     data = await UserRegistryModel.userRegistryMsg(requestParams.userName);
-                    redisUtil.hmset(key, data.dataValues);
+                    (data !== null) && redisUtil.hmset(key, data.dataValues);
                 }
                 ctx.response.status = 200;
                 ctx.body = {
                     code: 200,
                     msg: '查询成功',
-                    data: hitData || data
+                    data: {
+                        userMsg: (hitData || data || {})
+                    }
                 }
             }catch(err) {
                 ctx.response.status = 412;
