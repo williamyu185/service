@@ -5,10 +5,10 @@ const redisUtil = require('../utils/redis.js');
 class article {
     static async create(ctx) {
         //接收客服端
-        let request = ctx.request.body;
-        if(!validator.isEmpty(request.email) && !validator.isEmpty(request.password) && !validator.isEmpty(request.userName)) {
+        let requestParams = ctx.request.body;
+        if(!validator.isEmpty(requestParams.email) && !validator.isEmpty(requestParams.password) && !validator.isEmpty(requestParams.userName)) {
             try {
-                const ret = await UserRegistryModel.createUser(request);
+                const ret = await UserRegistryModel.createUser(requestParams);
                 const data = await UserRegistryModel.userRegistryMsg(ret.id);
                 ctx.response.status = 200;
                 ctx.body = {
@@ -32,8 +32,8 @@ class article {
             }
         }
     }
-    static async search(ctx) {
-        
+    static async modify(ctx) {
+
     }
     static async search(ctx) {
         let request = ctx.request;
