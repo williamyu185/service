@@ -33,6 +33,9 @@ class article {
         }
     }
     static async search(ctx) {
+        
+    }
+    static async search(ctx) {
         let request = ctx.request;
         let requestParams = request.body;
         if(!validator.isEmpty(requestParams.userName)) {
