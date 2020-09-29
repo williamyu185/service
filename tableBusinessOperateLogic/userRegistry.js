@@ -113,7 +113,7 @@ class userRegistry {
                 servletUtil.responseData({
                     ctx,
                     msg: '查询失败',
-                    code: 416
+                    code: 412
                 });
             }
         }else {

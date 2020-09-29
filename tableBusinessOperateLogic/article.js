@@ -1,6 +1,7 @@
 const ArticleModel = require('../tableCRUD/article');
 const validator = require('validator');
 const redisClient = require('../creatRedis/index.js');
+const servletUtil = require('../utils/servlet.js');
 
 class article {
     static async create(ctx) {
@@ -12,26 +13,24 @@ class article {
                 const ret = await ArticleModel.createArticle(request);
                 //使用刚刚创建的文章ID查询文章详情，且返回文章详情信息
                 const data = await ArticleModel.getArticleDetail(ret.id);
-                ctx.response.status = 200;
-                ctx.body = {
-                    code: 200,
+                servletUtil.responseData({
+                    ctx,
                     msg: '创建文章成功',
-                    data
-                }
+                    code: 0
+                });
             }catch(err) {
-                ctx.response.status = 412;
-                ctx.body = {
-                    code: 412,
+                servletUtil.responseData({
+                    ctx,
                     msg: '创建文章失败',
-                    data: err
-                }
+                    code: 412
+                });
             }
         }else {
-            ctx.response.status = 416;
-            ctx.body = {
-                code: 200,
-                msg: '参数不齐全'
-            }
+            servletUtil.responseData({
+                ctx,
+                msg: '参数不齐全',
+                code: 416
+            });
         }
     }
 }
