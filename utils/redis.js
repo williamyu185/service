@@ -1,5 +1,6 @@
 const redisClient = require('../creatRedis/index.js');
 const md5 = require('md5');
+const redisConfig = require('../config/redis.js');
 
 class redis {
     static md5Encode(key) {
@@ -15,7 +16,7 @@ class redis {
                     reslove(err);
                 }
             });
-            redisClient.expire(md5key, 60);
+            redisClient.expire(md5key, redisConfig.expire);
         })
     }
     static hgetall(key = '', isUUID = true) {
