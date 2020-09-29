@@ -3,9 +3,11 @@ const md5 = require('md5');
 const redisConfig = require('../config/redis.js');
 
 class redis {
+
     static md5Encode(key) {
         return md5(key);
     }
+
     static hmset(params) {
         return new Promise((reslove, reject) => {
             let md5key = (params.isUUID === undefined ? true : params.isUUID) ? redis.md5Encode(params.key) : params.key;
@@ -19,6 +21,7 @@ class redis {
             redisClient.expire(md5key, params.expire || redisConfig.expire);
         })
     }
+
     static hgetall(key = '', isUUID = true) {
         return new Promise((reslove, reject) => {
             redisClient.hgetall((isUUID ? redis.md5Encode(key) : key), (err, data) => {
@@ -31,5 +34,6 @@ class redis {
             });
         });
     }
+    
 }
 module.exports = redis;

@@ -76,7 +76,6 @@ class userRegistry {
                     code: 416
                 });
             }
-            
         }else {
             servletUtil.responseData({
                 ctx,

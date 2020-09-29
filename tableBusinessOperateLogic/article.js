@@ -4,6 +4,7 @@ const redisClient = require('../creatRedis/index.js');
 const servletUtil = require('../utils/servlet.js');
 
 class article {
+
     static async create(ctx) {
         //接收客服端
         let request = ctx.request.body;
@@ -33,6 +34,7 @@ class article {
             });
         }
     }
+    
 }
 
 module.exports = article;
