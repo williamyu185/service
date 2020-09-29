@@ -25,6 +25,16 @@ class UserRegistryModel {
         });
     }
 
+    static async modify(userName, newPassword) {
+        return await userRegistry.update({
+            password: newPassword
+        }, {
+            where: {
+                userName
+            }
+        });
+    }
+
 }
 
 module.exports = UserRegistryModel;

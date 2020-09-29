@@ -2,7 +2,15 @@ const UserRegistryModel = require('../tableCRUD/userRegistry.js');
 const validator = require('validator');
 const redisUtil = require('../utils/redis.js');
 
-class article {
+class userRegistry {
+    static responseData(ctx, msg = '', code = 416, data, status = 200) {
+        ctx.response.status = status;
+        ctx.body = {
+            code,
+            msg,
+            data
+        }
+    }
     static async create(ctx) {
         //接收客服端
         let requestParams = ctx.request.body;
@@ -17,23 +25,21 @@ class article {
                     data
                 }
             }catch(err) {
-                ctx.response.status = 412;
-                ctx.body = {
-                    code: 412,
-                    msg: '注册失败',
-                    data: err
-                }
+                userRegistry.fail(ctx, '注册失败');
             }
         }else {
-            ctx.response.status = 416;
-            ctx.body = {
-                code: 200,
-                msg: '参数不齐全'
-            }
+
         }
     }
     static async modify(ctx) {
-
+        let requestParams = ctx.request.body;
+        let userName = requestParams.userName;
+        let newPassword = requestParams.newPassword;
+        if(!validator.isEmpty(userName) && !validator.isEmpty(newPassword)) {
+            UserRegistryModel.modify(userName, newPassword);
+        }else {
+            userRegistry.fail(ctx, '用户名和新密码必传');
+        }
     }
     static async search(ctx) {
         let request = ctx.request;
@@ -57,21 +63,12 @@ class article {
                     }
                 }
             }catch(err) {
-                ctx.response.status = 412;
-                ctx.body = {
-                    code: 412,
-                    msg: '查询失败',
-                    data: {}
-                }
+                userRegistry.fail(ctx, '查询失败');
             }
         }else {
-            ctx.response.status = 416;
-            ctx.body = {
-                code: 416,
-                msg: '用户名必须传'
-            }
+            userRegistry.fail(ctx, '用户名必须传');
         }
     }
 }
 
-module.exports = article;
+module.exports = userRegistry;
