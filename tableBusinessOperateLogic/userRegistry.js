@@ -48,7 +48,7 @@ class article {
                 ctx.response.status = 200;
                 ctx.body = {
                     code: 200,
-                    msg: '查询成功',
+                    msg: '',
                     data: {
                         userMsg: (hitData || data || {})
                     }
