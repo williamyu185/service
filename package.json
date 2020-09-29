@@ -21,13 +21,13 @@
     "koa-session": "^6.0.0",
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
+    "md5": "^2.3.0",
     "moment": "^2.27.0",
     "mysql2": "^2.1.0",
     "nodemon": "^2.0.4",
     "pug": "^3.0.0",
     "redis": "^3.0.2",
     "sequelize": "^6.3.5",
-    "uuid": "^8.3.0",
     "validator": "^13.1.1"
   },
   "devDependencies": {

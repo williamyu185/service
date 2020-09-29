@@ -1,5 +1,6 @@
 const UserRegistryModel = require('../tableCRUD/userRegistry.js');
 const validator = require('validator');
+const redisUtil = require('../utils/redis.js');
 
 class article {
     static async create(ctx) {
@@ -37,12 +38,12 @@ class article {
         if(!validator.isEmpty(requestParams.userName)) {
             try {
                 let data = {};
+                let hitData = null;
                 let key = ctx.url + '-' + request.method + '-' + JSON.stringify(requestParams);
-                let hitData = await redisUtil.hgetall(key);
-                console.log(hitData, '=====45454//////');
+                hitData = await redisUtil.hgetall(key);
                 if(!hitData) {
                     data = await UserRegistryModel.userRegistryMsg(requestParams.userName);
-                    redisUtil.hmset(key, data);
+                    redisUtil.hmset(key, data.dataValues);
                 }
                 ctx.response.status = 200;
                 ctx.body = {
