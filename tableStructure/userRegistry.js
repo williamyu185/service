@@ -54,7 +54,7 @@ module.exports = function(sequelize) {
             type: Sequelize.STRING,
             allowNull: true,
             field: 'isEnable',
-            defaultValue: '0'
+            defaultValue: '1'
         },
     }, {
         timestamps: true,

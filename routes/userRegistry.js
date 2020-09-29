@@ -8,5 +8,6 @@ const router = new Router({
 router.post('/create', userRegistry.create);
 router.post('/search', userRegistry.search);
 router.post('/modify', userRegistry.modify);
+router.post('/del', userRegistry.del);
 
 module.exports = router;

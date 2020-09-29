@@ -34,38 +34,6 @@ class article {
             }
         }
     }
-    static async search(ctx) {
-        let id = ctx.params.id;
-        if(id) {
-            try {
-                let hitData = await redisClient.getAsync('bbs-Article-' + id, data);
-                if(!hitData) {
-                    // 查询文章详情模型
-                    let data = await ArticleModel.getArticleDetail(id);
-                    redisClient.setAsync('bbs-Article-' + id, data);
-                }
-                ctx.response.status = 200;
-                ctx.body = {
-                    code: 200,
-                    msg: '查询成功',
-                    data: hitData || data
-                }
-            }catch(err) {
-                ctx.response.status = 412;
-                ctx.body = {
-                    code: 412,
-                    msg: '查询失败',
-                    data
-                }
-            }
-        }else {
-            ctx.response.status = 416;
-            ctx.body = {
-                code: 416,
-                msg: '文章ID必须传'
-            }
-        }
-    }
 }
 
 module.exports = article;

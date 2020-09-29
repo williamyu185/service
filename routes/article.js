@@ -7,7 +7,5 @@ const router = new Router({
 
 // 创建文章
 router.post('/create', Artile.create);
-// 查询文章
-router.post('/search', Artile.search);
 
 module.exports = router;
