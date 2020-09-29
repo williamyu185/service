@@ -46,18 +46,18 @@ class UserRegistryModel {
     }
 
     static async del(id) {
-        // return await userRegistry.update({
-        //     isEnable: '0'
-        // }, {
-        //     where: {
-        //         id
-        //     }
-        // });
-        return await userRegistry.destroy({
+        return await userRegistry.update({
+            isEnable: '0'
+        }, {
             where: {
                 id
             }
         });
+        // return await userRegistry.destroy({
+        //     where: {
+        //         id
+        //     }
+        // });
     }
 
 }
