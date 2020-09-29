@@ -3,10 +3,12 @@ const validator = require('validator');
 const redisUtil = require('../utils/redis.js');
 const servletUtil = require('../utils/servlet.js');
 const md5 = require('md5');
+const loginAuthorityVerification = require('./loginAuthorityVerification.js');
 
 class userRegistry {
 
     static async create(ctx) {
+        
         //接收客服端
         let requestParams = ctx.request.body;
         let password = requestParams.password;
@@ -95,13 +97,15 @@ class userRegistry {
             try {
                 let data = [];
                 let hitData = null;
-                let key = ctx.url + ':' + request.method + ':' + JSON.stringify(requestParams);
-                hitData = await redisUtil.hgetall(key);
+                let namespace = ctx.url + ':' + request.method + ':';
+                let key = JSON.stringify(requestParams);
+                hitData = await redisUtil.hgetall(key, namespace);
                 if(!hitData) {
                     data = await UserRegistryModel.userRegistryMsg(requestParams.userName);
                     (data !== null) && redisUtil.hmset({
                         key, 
-                        value: data.dataValues
+                        value: data.dataValues,
+                        namespace
                     });
                 }
                 servletUtil.responseData({
@@ -122,6 +126,49 @@ class userRegistry {
             servletUtil.responseData({
                 ctx,
                 msg: '用户名必须传',
+                code: 416
+            });
+        }
+    }
+
+    static async login(ctx) {
+        let requestParams = ctx.request.body;
+        let email = requestParams.email;
+        let password = requestParams.password;
+        let token = requestParams.token;
+        if(!validator.isEmpty(email) && !validator.isEmpty(password)) {
+            try {
+                let userMsg = await UserRegistryModel.login(email);
+                userMsg = userMsg.dataValues;
+                if(token) {
+                    let token111 = loginAuthorityVerification.publicKey(token);
+                    
+                }
+                if(userMsg.password == md5(password)) {
+                    let token = loginAuthorityVerification.privateKey(email);
+                    servletUtil.responseData({
+                        ctx,
+                        msg: '登录成功',
+                        code: 0
+                    });
+                }else {
+                    servletUtil.responseData({
+                        ctx,
+                        msg: '验证失败',
+                        code: 416
+                    });
+                }
+            }catch(err) {
+                servletUtil.responseData({
+                    ctx,
+                    msg: '验证失败',
+                    code: 416
+                });
+            }
+        }else {
+            servletUtil.responseData({
+                ctx,
+                msg: '用户名、密码必传',
                 code: 416
             });
         }

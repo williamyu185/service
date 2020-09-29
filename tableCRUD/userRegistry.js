@@ -60,6 +60,14 @@ class UserRegistryModel {
         // });
     }
 
+    static async login(email) {
+        return await userRegistry.findOne({
+            where: {
+                email
+            }
+        });
+    }
+
 }
 
 module.exports = UserRegistryModel;

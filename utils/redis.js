@@ -11,7 +11,7 @@ class redis {
     static hmset(params) {
         return new Promise((reslove, reject) => {
             let md5key = (params.isUUID === undefined ? true : params.isUUID) ? redis.md5Encode(params.key) : params.key;
-            redisClient.hmset(md5key, params.value, (err, data) => {
+            redisClient.hmset(params.namespace + md5key, params.value, (err, data) => {
                 if(!err) {
                     reslove();
                 }else {
@@ -22,10 +22,9 @@ class redis {
         })
     }
 
-    static hgetall(key = '', isUUID = true) {
+    static hgetall(params) {
         return new Promise((reslove, reject) => {
-            redisClient.hgetall((isUUID ? redis.md5Encode(key) : key), (err, data) => {
-                console.log(data)
+            redisClient.hgetall(((params.isUUID === undefined ? true : params.isUUID) ? (params.namespace + redis.md5Encode(params.key)) : params.key), (err, data) => {
                 if(!err) {
                     reslove(data);
                 }else {
