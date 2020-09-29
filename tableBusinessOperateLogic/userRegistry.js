@@ -2,14 +2,17 @@ const UserRegistryModel = require('../tableCRUD/userRegistry.js');
 const validator = require('validator');
 const redisUtil = require('../utils/redis.js');
 const servletUtil = require('../utils/servlet.js');
+const md5 = require('md5');
 
 class userRegistry {
 
     static async create(ctx) {
         //接收客服端
         let requestParams = ctx.request.body;
-        if(!validator.isEmpty(requestParams.email) && !validator.isEmpty(requestParams.password) && !validator.isEmpty(requestParams.userName)) {
+        let password = requestParams.password;
+        if(!validator.isEmpty(requestParams.email) && !validator.isEmpty(password) && !validator.isEmpty(requestParams.userName)) {
             try {
+                requestParams.password = md5(password);
                 const ret = await UserRegistryModel.createUser(requestParams);
                 const data = await UserRegistryModel.userRegistryMsg(ret.id);
                 servletUtil.responseData({
@@ -92,7 +95,7 @@ class userRegistry {
             try {
                 let data = [];
                 let hitData = null;
-                let key = ctx.url + '-' + request.method + '-' + JSON.stringify(requestParams);
+                let key = ctx.url + ':' + request.method + ':' + JSON.stringify(requestParams);
                 hitData = await redisUtil.hgetall(key);
                 if(!hitData) {
                     data = await UserRegistryModel.userRegistryMsg(requestParams.userName);
