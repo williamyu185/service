@@ -135,21 +135,35 @@ class userRegistry {
         let email = requestParams.email;
         let password = requestParams.password;
         let token = requestParams.token;
+        if(token) {
+            let decodeEmail = await loginAuthorityVerification.decode(token);
+            let hitData = await redisUtil.hgetall(key, namespace);
+            if(hitData !== null) {
+                if(hitData.email == decodeEmail) {
+                    return;
+                }
+            }
+        }
         if(!validator.isEmpty(email) && !validator.isEmpty(password)) {
             try {
                 let userMsg = await UserRegistryModel.login(email);
                 userMsg = userMsg.dataValues;
-                if(token) {
-                    let token111 = loginAuthorityVerification.decode(token);
-                    
-                }
                 if(userMsg.password == md5(password)) {
-                    let token = loginAuthorityVerification.privateKey(email);
-                    console.log(token)
+                    let token = await loginAuthorityVerification.privateKey(email);
+                    redisUtil.hmset({
+                        key: token, 
+                        value: {
+                            email: userMsg.email
+                        },
+                        namespace: (ctx.url + ':' + request.method + ':')
+                    });
                     servletUtil.responseData({
                         ctx,
                         msg: '登录成功',
-                        code: 0
+                        code: 0,
+                        data: {
+                            token
+                        }
                     });
                 }else {
                     servletUtil.responseData({
