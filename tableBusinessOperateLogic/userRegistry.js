@@ -96,7 +96,7 @@ class userRegistry {
             try {
                 let data = [];
                 let hitData = null;
-                let namespace = ctx.url + ':' + request.method + ':';
+                let namespace = ctx.url + ':' + ctx.method + ':';
                 let key = JSON.stringify(requestParams);
                 hitData = await redisUtil.hgetall(key, namespace);
                 if(!hitData) {
@@ -134,7 +134,6 @@ class userRegistry {
         let requestParams = ctx.request.body;
         let email = requestParams.email;
         let password = requestParams.password;
-        let token = requestParams.token;
         if(!validator.isEmpty(email) && !validator.isEmpty(password)) {
             try {
                 let userMsg = await UserRegistryModel.login(email);
@@ -142,11 +141,11 @@ class userRegistry {
                 if(userMsg.password == md5(password)) {
                     let token = await loginAuthorityVerification.privateKey(email);
                     redisUtil.hmset({
-                        key: token, 
+                        key: token,
                         value: {
                             email: userMsg.email
                         },
-                        namespace: (ctx.url + ':' + request.method + ':')
+                        namespace: (ctx.url + ':' + ctx.method + ':')
                     });
                     servletUtil.responseData({
                         ctx,
@@ -188,7 +187,7 @@ class userRegistry {
         }
         if(token) {
             let decodeEmail = await loginAuthorityVerification.decode(token);
-            let hitData = await redisUtil.hgetall(key, namespace);
+            let hitData = await redisUtil.hgetall(key, (ctx.url + ':' + ctx.method + ':'));
             if(hitData !== null) {
                 if(hitData.email == decodeEmail) {
                     next();

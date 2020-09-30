@@ -12,6 +12,8 @@ const allRoutes = require('./routes/index.js');
 const config = require('./config/index.js');
 const userRegistry = require('./tableBusinessOperateLogic/userRegistry.js');
 app.keys = ['some secret hurr'];
+const env = process.env.NODE_ENV;
+const isDev = (env == 'development');
 const sessionConfig = {
    key: 'sessionId',   //cookie key (default is koa:sess)
    maxAge: 86400000,  // cookie的过期时间 maxAge in ms (default is 1 days)
@@ -49,17 +51,17 @@ app.use(koaBody({
     multipart: true
 }));
 app.use(json());
-app.use(logger());
+isDev && app.use(logger());
 app.use(require('koa-static')(__dirname + '/public'));
 // logger
-app.use(async (ctx, next) => {
+isDev && app.use(async (ctx, next) => {
   const start = new Date()
   await next()
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 });
 // loginAuthorityVerification
-app.use(async (ctx, next) => {
+!isDev && app.use(async (ctx, next) => {
     userRegistry.tokenVerification(ctx, next);
 });
 // routes
