@@ -4,6 +4,7 @@ const redisUtil = require('../utils/redis.js');
 const servletUtil = require('../utils/servlet.js');
 const md5 = require('md5');
 const loginAuthorityVerification = require('./loginAuthorityVerification.js');
+const tokenRedisNamespace = '/bbs/userRegistry/login:POST:';
 
 class userRegistry {
 
@@ -190,7 +191,7 @@ class userRegistry {
                 let decodeEmail = await loginAuthorityVerification.decode(token);
                 let hitData = await redisUtil.hgetall({
                     key: token,
-                    namespace: '/bbs/userRegistry/login:POST:'
+                    namespace: tokenRedisNamespace
                 });
                 if(hitData !== null) {
                     if(hitData.email == decodeEmail) {
