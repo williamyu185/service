@@ -182,17 +182,25 @@ class userRegistry {
         let requestParams = ctx.request.body;
         let token = requestParams.token;
         if(ctx.url == '/bbs/userRegistry/login') {
-            next();
+            await next();
             return;
         }
         if(token) {
-            let decodeEmail = await loginAuthorityVerification.decode(token);
-            let hitData = await redisUtil.hgetall(key, (ctx.url + ':' + ctx.method + ':'));
-            if(hitData !== null) {
-                if(hitData.email == decodeEmail) {
-                    next();
-                    return;
+            try {
+                let decodeEmail = await loginAuthorityVerification.decode(token);
+                let hitData = await redisUtil.hgetall(key, (ctx.url + ':' + ctx.method + ':'));
+                if(hitData !== null) {
+                    if(hitData.email == decodeEmail) {
+                        next();
+                        return;
+                    }
                 }
+            }catch(err) {
+                servletUtil.responseData({
+                    ctx,
+                    msg: 'token验证失败',
+                    code: 412
+                });
             }
         }else {
             servletUtil.responseData({

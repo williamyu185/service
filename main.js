@@ -61,8 +61,8 @@ isDev && app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 });
 // loginAuthorityVerification
-!isDev && app.use(async (ctx, next) => {
-    userRegistry.tokenVerification(ctx, next);
+app.use(async (ctx, next) => {
+    await userRegistry.tokenVerification(ctx, next);
 });
 // routes
 for(key in allRoutes) {

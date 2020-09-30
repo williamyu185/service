@@ -24,6 +24,7 @@ class LoginAuthorityVerification {
     }
 
     static async decode(token) {
+        console.log(public_key, '------>55555>*****')
         return jsonwebtoken.verify(token, public_key);
     }
 
