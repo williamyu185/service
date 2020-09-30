@@ -178,11 +178,10 @@ class userRegistry {
         }
     }
 
-    static async tokenVerification(ctx, next) {
+    static async tokenVerification(ctx) {
         let requestParams = ctx.request.body;
         let token = requestParams.token;
         if(ctx.url == '/bbs/userRegistry/login') {
-            await next();
             return;
         }
         if(token) {
