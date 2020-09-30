@@ -135,15 +135,6 @@ class userRegistry {
         let email = requestParams.email;
         let password = requestParams.password;
         let token = requestParams.token;
-        if(token) {
-            let decodeEmail = await loginAuthorityVerification.decode(token);
-            let hitData = await redisUtil.hgetall(key, namespace);
-            if(hitData !== null) {
-                if(hitData.email == decodeEmail) {
-                    return;
-                }
-            }
-        }
         if(!validator.isEmpty(email) && !validator.isEmpty(password)) {
             try {
                 let userMsg = await UserRegistryModel.login(email);
@@ -183,6 +174,31 @@ class userRegistry {
             servletUtil.responseData({
                 ctx,
                 msg: '用户名、密码必传',
+                code: 416
+            });
+        }
+    }
+
+    static async tokenVerification(ctx, next) {
+        let requestParams = ctx.request.body;
+        let token = requestParams.token;
+        if(ctx.url == '/bbs/userRegistry/login') {
+            next();
+            return;
+        }
+        if(token) {
+            let decodeEmail = await loginAuthorityVerification.decode(token);
+            let hitData = await redisUtil.hgetall(key, namespace);
+            if(hitData !== null) {
+                if(hitData.email == decodeEmail) {
+                    next();
+                    return;
+                }
+            }
+        }else {
+            servletUtil.responseData({
+                ctx,
+                msg: 'token必传',
                 code: 416
             });
         }

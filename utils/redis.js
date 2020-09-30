@@ -13,7 +13,7 @@ class redis {
             let md5key = (params.isUUID === undefined ? true : params.isUUID) ? redis.md5Encode(params.key) : params.key;
             redisClient.hmset(params.namespace + md5key, params.value, (err, data) => {
                 if(!err) {
-                    reslove();
+                    reslove(data);
                 }else {
                     reslove(err);
                 }

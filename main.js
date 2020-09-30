@@ -10,6 +10,7 @@ const koaBody = require('koa-body');
 const session = require('koa-session');
 const allRoutes = require('./routes/index.js');
 const config = require('./config/index.js');
+const userRegistry = require('./tableBusinessOperateLogic/userRegistry.js');
 app.keys = ['some secret hurr'];
 const sessionConfig = {
    key: 'sessionId',   //cookie key (default is koa:sess)
@@ -56,6 +57,10 @@ app.use(async (ctx, next) => {
   await next()
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+});
+// loginAuthorityVerification
+app.use(async (ctx, next) => {
+    userRegistry.tokenVerification(ctx, next);
 });
 // routes
 for(key in allRoutes) {
