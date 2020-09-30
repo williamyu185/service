@@ -13,18 +13,18 @@ class LoginAuthorityVerification {
 
     static async creatprivateAndPublishKey() {
         return {
-            privateKey: fs.readFileSync(path.join(__dirname,'../ras/private_key.pem')),
-            publicKey: fs.readFileSync(path.join(__dirname,'../ras/private_key.pem'))
+            privateKey: private_key,
+            publicKey: public_key
         };
     }
 
-    static async privateKey(unique) {
-        let token = jsonwebtoken.sign(unique, private_key, {algorithm: 'RS256'});
+    static async privateKey(userName) {
+        let token = jsonwebtoken.sign(userName, private_key, {algorithm: 'RS256'});
         return token;
     }
 
-    static async publicKey(private_key) {
-        return jsonwebtoken.verify(private_key, public_key)
+    static async decode(token) {
+        return jsonwebtoken.verify(token, public_key);
     }
 
 }

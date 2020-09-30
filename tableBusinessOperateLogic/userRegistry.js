@@ -52,7 +52,6 @@ class userRegistry {
                     code: 416
                 });
             }
-            
         }else {
             servletUtil.responseData({
                 ctx,
@@ -141,11 +140,12 @@ class userRegistry {
                 let userMsg = await UserRegistryModel.login(email);
                 userMsg = userMsg.dataValues;
                 if(token) {
-                    let token111 = loginAuthorityVerification.publicKey(token);
+                    let token111 = loginAuthorityVerification.decode(token);
                     
                 }
                 if(userMsg.password == md5(password)) {
                     let token = loginAuthorityVerification.privateKey(email);
+                    console.log(token)
                     servletUtil.responseData({
                         ctx,
                         msg: '登录成功',
