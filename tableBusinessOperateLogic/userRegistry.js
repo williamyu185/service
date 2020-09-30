@@ -19,7 +19,7 @@ class userRegistry {
                 const data = await UserRegistryModel.userRegistryMsg(ret.id);
                 servletUtil.responseData({
                     ctx,
-                    msg: '注册成功',
+                    msg: '发布成功',
                     data
                 });
             }catch(err) {
@@ -178,19 +178,23 @@ class userRegistry {
         }
     }
 
-    static async tokenVerification(ctx) {
+    static async tokenVerification(ctx, next) {
         let requestParams = ctx.request.body;
         let token = requestParams.token;
         if(ctx.url == '/bbs/userRegistry/login') {
+            await next();
             return;
         }
         if(token) {
             try {
                 let decodeEmail = await loginAuthorityVerification.decode(token);
-                let hitData = await redisUtil.hgetall(key, (ctx.url + ':' + ctx.method + ':'));
+                let hitData = await redisUtil.hgetall({
+                    key: token,
+                    namespace: '/bbs/userRegistry/login:POST:'
+                });
                 if(hitData !== null) {
                     if(hitData.email == decodeEmail) {
-                        next();
+                        await next();
                         return;
                     }
                 }
@@ -198,7 +202,8 @@ class userRegistry {
                 servletUtil.responseData({
                     ctx,
                     msg: 'token验证失败',
-                    code: 412
+                    code: 412,
+                    data: err
                 });
             }
         }else {

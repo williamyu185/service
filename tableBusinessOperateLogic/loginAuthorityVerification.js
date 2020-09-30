@@ -1,31 +1,22 @@
-const UserRegistryModel = require('../tableCRUD/userRegistry.js');
-const validator = require('validator');
-const redisUtil = require('../utils/redis.js');
-const servletUtil = require('../utils/servlet.js');
-const md5 = require('md5');
-const jsonwebtoken = require('jsonwebtoken');
-const fs = require('fs');
-const path = require('path');
-let private_key = fs.readFileSync(path.join(__dirname,'../ras/private_key.pem'));
-let public_key = fs.readFileSync(path.join(__dirname,'../ras/public_key.pem'));
+const NodeRSA = require('node-rsa');
+const key = new NodeRSA({b: 512});
+
+const text = '123@qq.com';
+const encrypted = key.encrypt(text, 'base64');
+console.log('encrypted: ', encrypted);
+const decrypted = key.decrypt(encrypted, 'utf8');
+console.log('decrypted: ', decrypted);
+
 
 class LoginAuthorityVerification {
 
-    static async creatprivateAndPublishKey() {
-        return {
-            privateKey: private_key,
-            publicKey: public_key
-        };
-    }
-
-    static async privateKey(userName) {
-        let token = jsonwebtoken.sign(userName, private_key, {algorithm: 'RS256'});
-        return token;
+    static async privateKey(email) {
+        return key.encrypt(email, 'base64');
     }
 
     static async decode(token) {
-        console.log(public_key, '------>55555>*****')
-        return jsonwebtoken.verify(token, public_key);
+        // console.log(key.decrypt(token, 'utf8'), '//56746846469----')
+        return key.decrypt(token, 'utf8');
     }
 
 }

@@ -63,7 +63,6 @@ isDev && app.use(async (ctx, next) => {
 // loginAuthorityVerification
 app.use(async (ctx, next) => {
     await userRegistry.tokenVerification(ctx, next);
-    await next();
 });
 // routes
 for(key in allRoutes) {
