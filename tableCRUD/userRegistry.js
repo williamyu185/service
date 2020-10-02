@@ -13,7 +13,8 @@ class UserRegistryModel {
         return await userRegistry.create({
             email: data.email,
             password: data.password,
-            userName: data.userName
+            userName: data.userName,
+            memberId: data.memberId
         });
     }
 

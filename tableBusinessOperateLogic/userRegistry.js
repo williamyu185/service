@@ -5,6 +5,7 @@ const servletUtil = require('../utils/servlet.js');
 const md5 = require('md5');
 const loginAuthorityVerification = require('./loginAuthorityVerification.js');
 const tokenRedisNamespace = '/bbs/userRegistry/login:POST:';
+const { v5: UUID_V5 } = require('uuid');
 
 class userRegistry {
 
@@ -13,14 +14,17 @@ class userRegistry {
         //接收客服端
         let requestParams = ctx.request.body;
         let password = requestParams.password;
-        if(!validator.isEmpty(requestParams.email) && !validator.isEmpty(password) && !validator.isEmpty(requestParams.userName)) {
+        let email = requestParams.email;
+        if(!validator.isEmpty(email) && !validator.isEmpty(password) && !validator.isEmpty(requestParams.userName)) {
             try {
                 requestParams.password = md5(password);
+                const UUID_NAMESPACE = '1b671a64-40d5-491e-99b0-da01ff1f3341';
+                requestParams.memberId = UUID_V5(email, UUID_NAMESPACE);
                 const ret = await UserRegistryModel.createUser(requestParams);
                 const data = await UserRegistryModel.userRegistryMsg(ret.id);
                 servletUtil.responseData({
                     ctx,
-                    msg: '发布成功',
+                    msg: '注册成功',
                     data
                 });
             }catch(err) {

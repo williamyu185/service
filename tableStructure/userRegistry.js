@@ -56,6 +56,12 @@ module.exports = function(sequelize) {
             field: 'isEnable',
             defaultValue: '1'
         },
+        memberId: {
+            type: Sequelize.STRING(500),
+            allowNull: true,
+            field: 'memberId',
+            defaultValue: ''
+        },
     }, {
         timestamps: true,
         freezeTableName: true,
