@@ -15,7 +15,6 @@ class LoginAuthorityVerification {
     }
 
     static async decode(token) {
-        // console.log(key.decrypt(token, 'utf8'), '//56746846469----')
         return key.decrypt(token, 'utf8');
     }
 

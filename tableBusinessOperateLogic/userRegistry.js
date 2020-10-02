@@ -104,7 +104,10 @@ class userRegistry {
                 let hitData = null;
                 let namespace = ctx.url + ':' + ctx.method + ':';
                 let key = JSON.stringify(requestParams);
-                hitData = await redisUtil.hgetall(key, namespace);
+                hitData = await redisUtil.hgetall({
+                    key,
+                    namespace
+                });
                 if(!hitData) {
                     data = await UserRegistryModel.userRegistryMsg(requestParams.userName);
                     (data !== null) && redisUtil.hmset({
