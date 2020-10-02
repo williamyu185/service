@@ -11,6 +11,7 @@ const session = require('koa-session');
 const allRoutes = require('./routes/index.js');
 const config = require('./config/index.js');
 const userRegistry = require('./tableBusinessOperateLogic/userRegistry.js');
+require('./asset/recreatePem.js');
 app.keys = ['some secret hurr'];
 const env = process.env.NODE_ENV;
 const isDev = (env == 'development');

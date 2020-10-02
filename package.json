@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "export NODE_ENV=development && nodemon main.js --debug --watch server --exec && babel-node ",
-    "dist-build": "export NODE_ENV=production && pm2 start main.js && babel-node",
-    "recreatePem": "rm -rf ./pem && node ./asset/recreatePem.js"
+    "dist-build": "export NODE_ENV=production && pm2 start main.js && babel-node"
   },
   "dependencies": {
     "cross-env": "^7.0.2",
