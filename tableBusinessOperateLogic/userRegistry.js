@@ -6,6 +6,7 @@ const md5 = require('md5');
 const loginAuthorityVerification = require('./loginAuthorityVerification.js');
 const tokenRedisNamespace = '/bbs/userRegistry/login:POST:';
 const { v5: UUID_V5 } = require('uuid');
+const checkTokenWhiteList = require('../asset/checkTokenWhiteList.js');
 
 class userRegistry {
 
@@ -150,7 +151,7 @@ class userRegistry {
                         value: {
                             email: userMsg.email
                         },
-                        namespace: (ctx.url + ':' + ctx.method + ':')
+                        namespace: tokenRedisNamespace
                     });
                     servletUtil.responseData({
                         ctx,
@@ -186,7 +187,7 @@ class userRegistry {
     static async tokenVerification(ctx, next) {
         let requestParams = ctx.request.body;
         let token = requestParams.token;
-        if(ctx.url == '/bbs/userRegistry/login') {
+        if(checkTokenWhiteList.indexOf(ctx.url) !== -1) {
             await next();
             return;
         }
