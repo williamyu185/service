@@ -1,10 +1,10 @@
 # 使用node搭建service服务层的设计与实现
 
 # 一、前期准备
-### 1.本机安装mysql、redis，及对应指令使用。
+### 1.本机安装mysql、redis，及相关指令使用。
 ### 2.需要学习和运用的相关技术与框架
 * koa洋葱模型
-* koa-router路由控制相关
+* koa-router路由控制
 * session存储与static静态资源管理
 * cors跨域控制
 * body数据提交格式与参数获取
@@ -41,3 +41,18 @@
 ### 5.config目录是redis、mysql配置文件。
 ### 6.creatRedis和creatThenKeepLinkDataBase创建redis、mysql的连接。
 ### 7.其他目录文件，略。
+
+# 五、用户表操作示例(账号注册)
+### 1.Postman接口调试
+* 接口准备：http://localhost:3000/bbs/userRegistry/login
+* formData数据：
+{
+    email:123@qq.com,
+    password: 123456
+}
+### 2.npm run dev启动本地服务
+### 3.routes/userRegistry.js依据path与提交方式进行业务层分流
+### 4.tableBusinessOperateLogic/userRegistry.js具体业务逻辑。
+### 5.tableCRUD/userRegistry.js模型层CRUD实现。
+### 6.tableStructure/userRegistry.js与数据层做映射。
+### 7.其他接口示例，略
