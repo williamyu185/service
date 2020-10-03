@@ -34,4 +34,6 @@
 ### 1.整体结构基本遵从MVC模式划分目录，根据我自己的理解，对结构目录做了适度的改动，方便更好的语义化理解。由于前后端分离，没有view层。
 ### 2.控制器层较简单，主要在tableBusinessOperateLogic目录下进行业务逻辑控制。
 ### 2.控制器(Controller)层较简单，主要在tableBusinessOperateLogic目录下进行业务逻辑控制。
-### 2.我对模型(Model)层了更多的细分，主要在tableCRUD和tableStructure目录下，其中tableStructure下的文件是使用sequelize做了对mysql下bbs库下各表属性字段的一一映射。
+### 2.我对模型(Model)层做了更多的细分，主要在tableCRUD和tableStructure目录下，其中tableStructure下的文件，是使用了sequelize做了对mysql下bbs库下各表属性字段的一一映射，用以初始化数据表并进行CRUD操作。
+### 3.接口路由层放在routes目录下。
+### 4.pem目录下的private.pem和public.pem，是node-rsa模块根据私钥签名生成token与公钥验签token生成明文的公私钥对，会在项目启动时自动生成，需要注意的是，如果手动删除该目录下的文件启动时会自动重新生成，新生成的公私钥对，无法解密以前的token，造成用户需要重新登录重新根据当前公私钥对生成token。
