@@ -5,7 +5,7 @@ let isExist = fs.existsSync(path.resolve(__dirname, '../pem/public.pem'));
 if(isExist) {
     return;
 }
-let key = new NodeRSA({ b: 512 });
+let key = new NodeRSA({b: 512});
 key.setOptions({encryptionScheme: 'pkcs1'});
 let privatePem = key.exportKey('pkcs1-private-pem');
 let publicPem = key.exportKey('pkcs1-public-pem');

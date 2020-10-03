@@ -34,4 +34,4 @@
 ### 1.整体结构基本遵从MVC模式划分目录，根据我自己的理解，对结构目录做了适度的改动，方便更好的语义化理解。由于前后端分离，没有view层。
 ### 2.控制器层较简单，主要在tableBusinessOperateLogic目录下进行业务逻辑控制。
 ### 2.控制器(Controller)层较简单，主要在tableBusinessOperateLogic目录下进行业务逻辑控制。
-### 2.我对模型(Model)层了更多的细分，主要在tableCRUD和tableStructure目录下，其中tableStructure下的文件是使用sequelize做了对mysql下bbs库下各表的一一映射。
+### 2.我对模型(Model)层了更多的细分，主要在tableCRUD和tableStructure目录下，其中tableStructure下的文件是使用sequelize做了对mysql下bbs库下各表属性字段的一一映射。
