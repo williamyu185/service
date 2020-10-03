@@ -55,4 +55,5 @@
 ### 4.tableBusinessOperateLogic/userRegistry.js具体业务逻辑。
 ### 5.tableCRUD/userRegistry.js模型层CRUD实现。
 ### 6.tableStructure/userRegistry.js与数据层做映射。
-### 7.其他接口示例，略
+### 7.关于用户登录凭证的token认证：除登录和创建账号接口，其他接口均需进行认证。
+### 8.其他接口示例，略
