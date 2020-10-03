@@ -28,6 +28,10 @@
 ### 3.数据库可视化工具MYSQL WorkBench
 ### 4.如果存取数据涉及到redis与mysql分布式集群开发，请在config文件夹下配置集群服务器的相关信息。
 ### 5.如果服务层本身是集群式开发，可使用nginx反向代理此项目。
+### 6.为了使用es6语法的async，await语法，对redis基础api做了Promise封装。常用工具类在utis文件夹下。
 
 # 四、项目结构目录与说明
-### 1.整体结构遵从MVC模式划分目录，由于前后端分离，目录中没有view层。
+### 1.整体结构基本遵从MVC模式划分目录，根据我自己的理解，对结构目录做了适度的改动，方便更好的语义化理解。由于前后端分离，没有view层。
+### 2.控制器层较简单，主要在tableBusinessOperateLogic目录下进行业务逻辑控制。
+### 2.控制器(Controller)层较简单，主要在tableBusinessOperateLogic目录下进行业务逻辑控制。
+### 2.我对模型(Model)层了更多的细分，主要在tableCRUD和tableStructure目录下，其中tableStructure下的文件是使用sequelize做了对mysql下bbs库下各表的一一映射。
