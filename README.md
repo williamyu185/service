@@ -36,7 +36,7 @@
 ### 2.控制器(Controller)层较简单，主要在tableBusinessOperateLogic目录下进行业务逻辑控制。
 ### 2.我对模型(Model)层做了更多的细分，主要在tableCRUD和tableStructure目录下，其中tableStructure下的文件，是使用了sequelize做了对mysql下bbs库下各表属性字段的一一映射，用以初始化数据表并进行CRUD操作。
 ### 3.接口路由层放在routes目录下。
-### 4.pem目录下的private.pem和public.pem，是node-rsa模块根据私钥签名生成token与公钥验签token生成明文的公私钥对，会在项目启动时自动生成，需要注意的是，如果手动删除该目录下的文件启动时会自动重新生成，新生成的公私钥对，无法解密以前的token，造成用户需要重新登录重新根据当前公私钥对生成token。
+### 4.pem目录下的private.pem和public.pem，是node-rsa模块根据私钥签名生成token与公钥验签token生成明文的公私钥对，会在项目启动时自动生成，需要注意的是，如果手动删除该目录下的文件启动时会自动重新生成，新生成的公私钥对，无法解密以前的token，造成用户需要重新登录重新根据当前公私钥对生成token。RSA算法有一定的计算量，而Node并不适合做计算密集型的操作，此外公私钥对的读取设计IO流的文件读取。当登录与注册接口被频繁调用早成主线程较长时间阻塞，影响其他接口的使用了，造成并发量大幅下降。建议访问量较大的站点，将登录与身份认证等功能单独迁出，做专门的单点登录服务器，配以redis缓存命中处理。
 ### 4.utils目录是常用工具类，对常用方法进行封装。
 ### 5.config目录是redis、mysql配置文件。
 ### 6.creatRedis和creatThenKeepLinkDataBase创建redis、mysql的连接。
