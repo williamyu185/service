@@ -40,4 +40,4 @@
 ### 4.utils目录是常用工具类，对常用方法进行封装。
 ### 5.config目录是redis、mysql配置文件。
 ### 6.creatRedis和creatThenKeepLinkDataBase创建redis、mysql的连接。
-### 7.其他目录，略。
+### 7.其他目录文件，略。
