@@ -6,7 +6,7 @@ const md5 = require('md5');
 const loginAuthorityVerification = require('./loginAuthorityVerification.js');
 const tokenRedisNamespace = '/bbs/userRegistry/login:POST:';
 const { v5: UUID_V5 } = require('uuid');
-const checkTokenWhiteList = require('../asset/checkTokenWhiteList.js');
+const noCheckTokenWhiteList = require('../asset/noCheckTokenWhiteList.js');
 
 class userRegistry {
 
@@ -190,7 +190,7 @@ class userRegistry {
     static async tokenVerification(ctx, next) {
         let requestParams = ctx.request.body;
         let token = requestParams.token;
-        if(checkTokenWhiteList.indexOf(ctx.url) !== -1) {
+        if(noCheckTokenWhiteList.indexOf(ctx.url) !== -1) {
             await next();
             return;
         }
