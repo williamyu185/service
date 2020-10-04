@@ -1,5 +1,5 @@
-# 使用node搭建service服务层的设计与实现
-
+# 使用node搭建服务器端service层的设计与实现
+&nbsp;
 # 一、前期准备
 ### 1.本机安装mysql、redis，及相关指令使用。
 ### 2.需要学习和运用的相关技术与框架
@@ -17,7 +17,7 @@
 * md5内容一致性的防篡改算法
 * bable、pm2、nodemon等其他，略
 #### 以上，原理、API和安装方法请自行百度
-
+&nbsp;
 # 二、架构层的基本组成与说明
 ### 1.整体架构层技术栈：node+koa(及相关插件)+koa-router+redis+sequelize+mysql
 ### 2.接口调试工具Postman
@@ -25,7 +25,7 @@
 ### 4.如果存取数据涉及到redis与mysql分布式集群开发，请在config文件夹下配置集群服务器的相关信息。
 ### 5.如果服务层本身是集群式开发，可使用nginx反向代理此项目。
 ### 6.为了使用es6语法的async，await语法，对redis基础api做了Promise封装。常用工具类在utis文件夹下。
-
+&nbsp;
 # 三、项目结构目录与说明
 ### 1.整体结构基本遵从MVC模式划分目录，根据我自己的理解，对结构目录做了适度的改动，方便更好的语义化理解。由于前后端分离，没有view层。
 ### 2.控制器层较简单，主要在tableBusinessOperateLogic目录下进行业务逻辑控制。
@@ -37,7 +37,7 @@
 ### 5.config目录是redis、mysql配置文件。
 ### 6.creatRedis和creatThenKeepLinkDataBase创建redis、mysql的连接。
 ### 7.其他目录文件，略。
-
+&nbsp;
 # 四、用户表操作示例(账号注册)
 ### 1.Postman接口调试
 * 接口准备：http://localhost:3000/bbs/userRegistry/login
@@ -53,7 +53,7 @@
 ### 6.tableStructure/userRegistry.js与数据层做映射。
 ### 7.关于用户登录凭证的token认证：除登录和创建账号接口，其他接口均需进行认证。
 ### 8.其他接口示例，略
-
+&nbsp;
 # 五、不足、适用性与局限性说明
 ### 1.本人对服务器端开发与技术框架经验不多，难免有错误与不足处，敬请谅解。
 ### 2.考虑到开发效率问题，未将TypeScript强类型检测加入到项目中，所以此项目并不适合复杂业务场景下的企业级服务开发。
