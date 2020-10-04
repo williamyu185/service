@@ -24,7 +24,7 @@
 ### 3.数据库可视化工具MYSQL WorkBench
 ### 4.如果存取数据涉及到redis与mysql分布式集群开发，请在config文件夹下配置集群服务器的相关信息。
 ### 5.如果服务层本身是集群式开发，可使用nginx反向代理此项目。
-### 6.为了使用es6语法的async，await语法，对redis基础api做了Promise封装。常用工具类放在utis文件夹下。
+### 6.为了更好的使用es6中的async、await语法，对redis基础API做了Promise封装。
 &nbsp;
 # 三、项目结构目录与说明
 ### 1.整体项目结构基本遵从MVC模式划分目录，根据我自己的理解，对结构目录做了适度的改动，方便更好的语义化理解。由于前后端分离，没有view层。
@@ -46,15 +46,15 @@
     email:123@qq.com,
     password: 123456
 }
-### 2.npm run dev启动本地服务
-### 3.routes/userRegistry.js依据path与提交方式进行业务层分流
+### 2.npm run dev启动本地服务。
+### 3.routes/userRegistry.js依据path与提交方式进行业务层分流。
 ### 4.tableBusinessOperateLogic/userRegistry.js具体业务逻辑。
 ### 5.tableCRUD/userRegistry.js模型层CRUD实现。
 ### 6.tableStructure/userRegistry.js与数据层映射。
 ### 7.关于用户登录凭证的token认证：除登录和创建账号接口，其他接口均需进行认证(无需token验证白名单可在asset/noCheckTokenWhiteList.js里配置)。
-### 8.其他接口示例，略
+### 8.其他接口示例，略。
 &nbsp;
 # 五、不足、适用性与局限性说明
 ### 1.本人对服务器端开发与技术框架只是初步了解、经验不足，文中难免有错误与不严谨的地方，敬请谅解。错误更正与修改还请多多指教，联系邮箱:checkout1988@163.com。
 ### 2.考虑到开发效率问题，未将TypeScript强类型检测加入到项目中，所以此项目并不适合复杂业务场景下的企业级服务开发。
-### 3.node服务器在海量数据请求下的高并发、虚拟机稳定性与第三方技术支持，社区生态成熟度等方面，无法与java相比。此项目不适用于追求高可靠性与高并发的服务器端开发。
+### 3.node服务器在海量数据请求下的高并发、虚拟机稳定性与第三方技术支持，社区生态成熟度等方面，还无法与java相比。此项目不适合追求高可靠性与高并发的服务器端项目开发。
