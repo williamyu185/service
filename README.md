@@ -16,7 +16,7 @@
 * 基于RSA算法的非对称公私钥对加密解密
 * md5内容一致性的防篡改算法
 * bable、pm2、nodemon等其他，略
-#### 以上，原理、API和安装方法可自行百度解决
+#### 以上，原理、API和安装方法可自行百度
 &nbsp;
 # 二、架构层的基本组成与说明
 ### 1.整体架构层技术栈：node+koa(及相关插件)+koa-router+redis+sequelize+mysql
