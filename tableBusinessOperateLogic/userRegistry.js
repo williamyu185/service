@@ -5,7 +5,7 @@ const servletUtil = require('../utils/servlet.js');
 const md5 = require('md5');
 const loginAuthorityVerification = require('./loginAuthorityVerification.js');
 const tokenRedisNamespace = '/bbs/userRegistry/login:POST:';
-const { v5: UUID_V5 } = require('uuid');
+const { v4: UUID_V4 } = require('uuid');
 const noCheckTokenWhiteList = require('../asset/noCheckTokenWhiteList.js');
 
 class userRegistry {
@@ -19,8 +19,7 @@ class userRegistry {
         if(!validator.isEmpty(email) && !validator.isEmpty(password) && !validator.isEmpty(requestParams.userName)) {
             try {
                 requestParams.password = md5(password);
-                const UUID_NAMESPACE = '1b671a64-40d5-491e-99b0-da01ff1f3341';
-                requestParams.memberId = UUID_V5(email, UUID_NAMESPACE);
+                requestParams.memberId = UUID_V4();
                 const ret = await UserRegistryModel.createUser(requestParams);
                 const data = await UserRegistryModel.userRegistryMsg(ret.id);
                 servletUtil.responseData({
