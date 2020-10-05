@@ -10,7 +10,7 @@
 * request body数据提交格式与参数获取
 * sequelize操作数据库
 * redis操作内存数据
-* VSCode编辑器下的debug断点调试工具使用
+* VSCode编辑器下的debug断点调试工具
 * uuid唯一性生成
 * validator数据校检
 * 基于RSA算法的非对称公私钥对加密解密
