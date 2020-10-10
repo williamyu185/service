@@ -6,7 +6,10 @@ let config = {
         password: '123456789'
     },
     production: {
-
+        host: '127.0.0.1',
+        database: 'bbs',
+        account: 'root',
+        password: '*Mz1Nj:N_BM?'
     }
 };
 
