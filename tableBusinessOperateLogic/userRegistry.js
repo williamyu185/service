@@ -69,7 +69,7 @@ class userRegistry {
     static async modify(ctx) {
         let requestParams = ctx.request.body;
         let id = requestParams.id;
-        let newPassword = requestParams.newPassword;
+        let newPassword = md5(requestParams.newPassword);
         if(!validator.isEmpty(id) && !validator.isEmpty(newPassword)) {
             try {
                 await UserRegistryModel.modify(id, newPassword);
