@@ -5,7 +5,7 @@ const Op = Sequelize.Op;
 // 引入数据表模型
 const userRegistry = (require('../tableStructure/userRegistry'))(Sequelize);
 //自动创建表
-userRegistry.sync({force: true});
+userRegistry.sync({force: false});
 
 class UserRegistryModel {
 
