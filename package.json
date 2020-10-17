@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "export NODE_ENV=development && nodemon main.js --debug --watch server --exec && babel-node ",
     "build": "export NODE_ENV=production && pm2 start main.js && babel-node",
-    "sotpAll": "pm2 stop all"
+    "stopAll": "pm2 stop all"
   },
   "dependencies": {
     "cross-env": "^7.0.2",
