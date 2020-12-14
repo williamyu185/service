@@ -1,4 +1,4 @@
-const redisClient = require('../creatRedis/index.js');
+const redisClient = require('../createRedis/index.js');
 const md5 = require('md5');
 const redisConfig = require('../config/redis.js');
 

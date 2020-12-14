@@ -1,5 +1,5 @@
 // 引入sequelize对象
-const baseInstance = require('../creatMysql/index.js');
+const baseInstance = require('../createMysql/index.js');
 const Sequelize = baseInstance.defaultBaseInstance;
 const Op = Sequelize.Op;
 // 引入数据表模型

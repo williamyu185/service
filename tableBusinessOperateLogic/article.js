@@ -1,6 +1,6 @@
 const ArticleModel = require('../tableCRUD/article');
 const validator = require('validator');
-const redisClient = require('../creatRedis/index.js');
+const redisClient = require('../createRedis/index.js');
 const servletUtil = require('../utils/servlet.js');
 
 class article {
